@@ -1,3 +1,9 @@
+
+# BUTTON PRESS
+When /^(?:|I )press "([^"]*)"$/ do |button|
+  click_button(button)
+end
+
 # Add a declarative step here for populating the DB with movies.
 
 Given /the following movies exist/ do |movies_table|
@@ -19,25 +25,18 @@ Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
   flunk "Unimplemented"
 end
 
-# Make it easier to express checking or unchecking several boxes at once
-#  "When I uncheck the following ratings: PG, G, R"
-#  "When I check the following ratings: G"
-
 When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
 =begin 
-  # HINT: use String#split to split up the rating_list, then
-  #   iterate over the ratings and reuse the "When I check..." or
-  #   "When I uncheck..." steps in lines 89-95 of web_steps.rb
+  steps in lines 89-95 of web_steps.rb
 =end
-  rating_list.split.each do |rating|
-		When /^(?:|I )check "([^"]*)"$/ do |field|
-		  check(field)
-		end
-
-		When /^(?:|I )uncheck "([^"]*)"$/ do |field|
-		  uncheck(field)
+  rating_list.split(', ').each do |rating|
+		if uncheck.nil?
+      check("ratings_"+rating)
+		  #step "I check #{rating}"
+    else
+      uncheck("ratings_"+rating)
+		  #step "I uncheck #{rating}"
 		end
   end
-  #debugger
-  #assert(false, "This was expected to be true")
 end
+
