@@ -23,10 +23,17 @@ Background: movies have been added to database
   
 Scenario: restrict to movies with 'PG' or 'R' ratings
   # enter step(s) to check the 'PG' and 'R' checkboxes
+  Given I check the following ratings: G, PG, R
   # enter step(s) to uncheck all other checkboxes
+  And i uncheck the following ratings: G
   # enter step to "submit" the search form on the homepage
+  When i press "submit"
+  Then i should be on the RottenPotatoes home page
   # enter step(s) to ensure that PG and R movies are visible
+  And I should see "The Terminator"
+  And I should see "Chocolat"
   # enter step(s) to ensure that other movies are not visible
+  And I should not see "Chicken Run"
 
 Scenario: no ratings selected
   # see assignment
