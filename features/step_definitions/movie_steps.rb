@@ -40,6 +40,9 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   end
 end
 
-
+Then /^I should see all of the movies$/ do
+  #Count rows of css table#movies tr)
+  page.all('table#movies tr').count.should == 11
+end
 
 
