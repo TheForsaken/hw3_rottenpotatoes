@@ -31,12 +31,15 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
 =end
   rating_list.split(', ').each do |rating|
 		if uncheck.nil?
-      check("ratings_"+rating)
-		  #step "I check #{rating}"
-    else
-      uncheck("ratings_"+rating)
-		  #step "I uncheck #{rating}"
+			check("ratings_"+rating)
+			#step "I check #{rating}"
+		else
+			uncheck("ratings_"+rating)
+			#step "I uncheck #{rating}"
 		end
   end
 end
+
+
+
 

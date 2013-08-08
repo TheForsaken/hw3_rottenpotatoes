@@ -34,6 +34,7 @@ Scenario: restrict to movies with 'PG' or 'R' ratings
   And I should see "The Incredibles "
   # enter step(s) to ensure that other movies are not visible
   And I should not see "Chicken Run"
+  And I should not see "Chocolat"
 
 Scenario: no ratings selected
   # enter step(s) to uncheck all other checkboxes
@@ -45,7 +46,13 @@ Scenario: no ratings selected
   And I should not see "The Terminator"
   And I should not see "Chicken Run"
   And I should not see "Chocolat"
+  And I should not see "The Incredibles"
  
 
 Scenario: all ratings selected
-  # see assignment
+  # enter step(s) to uncheck all other checkboxes
+  Given I check the following ratings: G, PG, R, PG-13
+  # enter step to "submit" the search form on the homepage
+  When I press "ratings_submit"
+  Then I should be on the RottenPotatoes home page
+  Then I should see all of the movies
